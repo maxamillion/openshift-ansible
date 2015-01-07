@@ -71,6 +71,11 @@ module OpenShift
       def self.generate_env_host_type_tag_name(env, host_type)
         return "tag_#{generate_env_host_type_tag(env, host_type)}"
       end
+
+      def self.generate_network_name(env)
+        return "#{env}-net"
+      end
+
     end
   end
 end

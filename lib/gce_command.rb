@@ -40,6 +40,7 @@ module OpenShift
         ah.extra_vars['oo_new_inst_tags'] << GceHelper.generate_env_tag(options[:env])
         ah.extra_vars['oo_new_inst_tags'] << GceHelper.generate_host_type_tag(options[:type])
         ah.extra_vars['oo_new_inst_tags'] << GceHelper.generate_env_host_type_tag(options[:env], options[:type])
+        ah.extra_vars['oo_new_inst_tags'] << GceHelper.generate_network_name(options[:env])
 
         puts
         puts "Creating #{options[:count]} #{options[:type]} instance(s) in GCE..."

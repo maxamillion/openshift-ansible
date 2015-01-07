@@ -1,0 +1,14 @@
+---
+- name: Configure cluster network
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    oo_network_state: "present"
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - include: network_tasks.yml

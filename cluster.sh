@@ -16,6 +16,7 @@ UPPER_CASE_PROVIDER=$(echo $PROVIDER | tr '[:lower:]' '[:upper:]')
 # FIXME: Add options
 MASTER_PLAYBOOK=openshift-master
 MINION_PLAYBOOK=openshift-minion
+NETWORK_PLAYBOOK=openshift-network
 
 
 # @formatter:off

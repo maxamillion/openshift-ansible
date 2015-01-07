@@ -22,6 +22,7 @@
         pem_file: "{{ gce_pem_file }}"
         project_id: "{{ gce_project_id }}"
         tags: "{{ oo_new_inst_tags }}"
+        network: "{{ oo_network }}"
       register: gce
 
     - name: Add new instances public IPs to oo_hosts_to_config
