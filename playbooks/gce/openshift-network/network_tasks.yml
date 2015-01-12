@@ -12,7 +12,7 @@
     state: "{{ oo_network_state }}"
   when: oo_network_state == "present"
 
-- name: Configure firewall rule - Allow Internal TCP - "{{ oo_network_state }}"
+- name: Create/configure firewall rule - Allow Internal TCP
   gce_net:
     service_account_email: "{{ gce_service_account_email }}"
     pem_file: "{{ gce_pem_file }}"
@@ -22,8 +22,20 @@
     src_range: "{{ oo_network_range }}"
     allowed: 'tcp:1-65535'
     state: "{{ oo_network_state }}"
+  when: oo_network_state == "present"
 
-- name: Configure firewall rule - Allow Internal UDP - "{{ oo_network_state }}"
+- name: Delete firewall rule - Allow Internal TCP
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    fwname: "{{ oo_network }}-allow-internal"
+    src_range: "{{ oo_network_range }}"
+    allowed: 'tcp:1-65535'
+    state: "{{ oo_network_state }}"
+  when: oo_network_state == "deleted"
+
+- name: Create/Configure firewall rule - Allow Internal UDP
   gce_net:
     service_account_email: "{{ gce_service_account_email }}"
     pem_file: "{{ gce_pem_file }}"
@@ -33,8 +45,20 @@
     src_range: "{{ oo_network_range }}"
     allowed: 'udp:1-65535'
     state: "{{ oo_network_state }}"
+  when: oo_network_state == "present"
 
-- name: Configure firewall rule - Allow Internal ICMP - "{{ oo_network_state }}"
+- name: Delete firewall rule - Allow Internal UDP
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    fwname: "{{ oo_network }}-allow-internal"
+    src_range: "{{ oo_network_range }}"
+    allowed: 'udp:1-65535'
+    state: "{{ oo_network_state }}"
+  when: oo_network_state == "deleted"
+
+- name: Create/Configure firewall rule - Allow Internal ICMP
   gce_net:
     service_account_email: "{{ gce_service_account_email }}"
     pem_file: "{{ gce_pem_file }}"
@@ -44,8 +68,20 @@
     src_range: "{{ oo_network_range }}"
     allowed: 'tcp:1-65535'
     state: "{{ oo_network_state }}"
+  when: oo_network_state == "present"
 
-- name: Configure firewall rule - Allow SSH - "{{ oo_network_state }}"
+- name: Delete firewall rule - Allow Internal ICMP
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    fwname: "{{ oo_network }}-allow-internal"
+    src_range: "{{ oo_network_range }}"
+    allowed: 'tcp:1-65535'
+    state: "{{ oo_network_state }}"
+  when: oo_network_state == "deleted"
+
+- name: Create/Configure firewall rule - Allow SSH
   gce_net:
     service_account_email: "{{ gce_service_account_email }}"
     pem_file: "{{ gce_pem_file }}"
@@ -54,8 +90,19 @@
     fwname: "{{ oo_network }}-allow-ssh"
     allowed: "tcp:22"
     state: "{{ oo_network_state }}"
+  when: oo_network_state == "present"
 
-- name: Configure firewall rule - Allow HTTP - "{{ oo_network_state }}"
+- name: Delete firewall rule - Allow SSH
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    fwname: "{{ oo_network }}-allow-ssh"
+    allowed: "tcp:22"
+    state: "{{ oo_network_state }}"
+  when: oo_network_state == "deleted"
+
+- name: Create/Configure firewall rule - Allow HTTP
   gce_net:
     service_account_email: "{{ gce_service_account_email }}"
     pem_file: "{{ gce_pem_file }}"
@@ -64,8 +111,19 @@
     fwname: "{{ oo_network }}-allow-http"
     allowed: "tcp:80"
     state: "{{ oo_network_state }}"
+  when: oo_network_state == "present"
 
-- name: Configure firewall rule - Allow HTTPS - "{{ oo_network_state }}"
+- name: Create/Configure firewall rule - Allow HTTP
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    fwname: "{{ oo_network }}-allow-http"
+    allowed: "tcp:80"
+    state: "{{ oo_network_state }}"
+  when: oo_network_state == "deleted"
+
+- name: Create/Configure firewall rule - Allow HTTPS
   gce_net:
     service_account_email: "{{ gce_service_account_email }}"
     pem_file: "{{ gce_pem_file }}"
@@ -74,8 +132,19 @@
     fwname: "{{ oo_network }}-allow-https"
     allowed: "tcp:443"
     state: "{{ oo_network_state }}"
+  when: oo_network_state == "present"
 
-- name: Configure firewall rule - Allow ICMP - "{{ oo_network_state }}"
+- name: Delete firewall rule - Allow HTTPS
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    fwname: "{{ oo_network }}-allow-https"
+    allowed: "tcp:443"
+    state: "{{ oo_network_state }}"
+  when: oo_network_state == "deleted"
+
+- name: Create/Configure firewall rule - Allow ICMP
   gce_net:
     service_account_email: "{{ gce_service_account_email }}"
     pem_file: "{{ gce_pem_file }}"
@@ -84,6 +153,17 @@
     fwname: "{{ oo_network }}-allow-icmp"
     allowed: "icmp"
     state: "{{ oo_network_state }}"
+  when: oo_network_state == "present"
+
+- name: Delete firewall rule - Allow ICMP
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    fwname: "{{ oo_network }}-allow-icmp"
+    allowed: "icmp"
+    state: "{{ oo_network_state }}"
+  when: oo_network_state == "deleted"
 
 - name: Terminate network
   gce_net:

@@ -103,6 +103,8 @@ module OpenShift
 
         abort 'Error: you can\'t specify both --name and --env' unless options[:env].nil? || options[:name].nil?
 
+        ah.extra_vars['oo_network'] = GceHelper.generate_network_name(options[:env])
+
         host_type = nil
         if options[:name]
           details = GceHelper.get_host_details(options[:name])
