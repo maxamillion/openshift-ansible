@@ -12,38 +12,38 @@
     state: "{{ oo_network_state }}"
   when: oo_network_state == "present"
 
-#- name: Configure firewall rule - Allow Internal TCP - "{{ oo_network_state }}"
-#  gce_net:
-#    service_account_email: "{{ gce_service_account_email }}"
-#    pem_file: "{{ gce_pem_file }}"
-#    project_id: "{{ gce_project_id }}"
-#    name: "{{ oo_network }}"
-#    fwname: "{{ oo_network }}-allow-internal"
-#    src_range: "{{ oo_network_range }}"
-#    allowed: 'tcp:1-65535'
-#    state: "{{ oo_network_state }}"
-#
-#- name: Configure firewall rule - Allow Internal UDP - "{{ oo_network_state }}"
-#  gce_net:
-#    service_account_email: "{{ gce_service_account_email }}"
-#    pem_file: "{{ gce_pem_file }}"
-#    project_id: "{{ gce_project_id }}"
-#    name: "{{ oo_network }}"
-#    fwname: "{{ oo_network }}-allow-internal"
-#    src_range: "{{ oo_network_range }}"
-#    allowed: 'udp:1-65535'
-#    state: "{{ oo_network_state }}"
-#
-#- name: Configure firewall rule - Allow Internal ICMP - "{{ oo_network_state }}"
-#  gce_net:
-#    service_account_email: "{{ gce_service_account_email }}"
-#    pem_file: "{{ gce_pem_file }}"
-#    project_id: "{{ gce_project_id }}"
-#    name: "{{ oo_network }}"
-#    fwname: "{{ oo_network }}-allow-internal"
-#    src_range: "{{ oo_network_range }}"
-#    allowed: 'tcp:1-65535'
-#    state: "{{ oo_network_state }}"
+- name: Configure firewall rule - Allow Internal TCP - "{{ oo_network_state }}"
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    name: "{{ oo_network }}"
+    fwname: "{{ oo_network }}-allow-internal"
+    src_range: "{{ oo_network_range }}"
+    allowed: 'tcp:1-65535'
+    state: "{{ oo_network_state }}"
+
+- name: Configure firewall rule - Allow Internal UDP - "{{ oo_network_state }}"
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    name: "{{ oo_network }}"
+    fwname: "{{ oo_network }}-allow-internal"
+    src_range: "{{ oo_network_range }}"
+    allowed: 'udp:1-65535'
+    state: "{{ oo_network_state }}"
+
+- name: Configure firewall rule - Allow Internal ICMP - "{{ oo_network_state }}"
+  gce_net:
+    service_account_email: "{{ gce_service_account_email }}"
+    pem_file: "{{ gce_pem_file }}"
+    project_id: "{{ gce_project_id }}"
+    name: "{{ oo_network }}"
+    fwname: "{{ oo_network }}-allow-internal"
+    src_range: "{{ oo_network_range }}"
+    allowed: 'tcp:1-65535'
+    state: "{{ oo_network_state }}"
 
 - name: Configure firewall rule - Allow SSH - "{{ oo_network_state }}"
   gce_net:

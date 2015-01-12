@@ -31,6 +31,8 @@ EOT
 # @formatter:on
 
 function create_cluster {
+    ./cloud.rb "${PROVIDER}" launch -e "${ENV}" --type=$NETWORK_PLAYBOOK -c $MASTERS
+
     ./cloud.rb "${PROVIDER}" launch -e "${ENV}" --type=$MASTER_PLAYBOOK -c $MASTERS
 
     ./cloud.rb "${PROVIDER}" launch -e "${ENV}" --type=$MINION_PLAYBOOK -c $MINIONS
@@ -41,6 +43,7 @@ function create_cluster {
 }
 
 function update_cluster {
+    ./cloud.rb "${PROVIDER}" config -e "${ENV}" --type=$NETWORK_PLAYBOOK
     ./cloud.rb "${PROVIDER}" config -e "${ENV}" --type=$MASTER_PLAYBOOK
     ./cloud.rb "${PROVIDER}" config -e "${ENV}" --type=$MINION_PLAYBOOK
 }
@@ -48,6 +51,7 @@ function update_cluster {
 function terminate_cluster {
     ./cloud.rb "${PROVIDER}" terminate -e "${ENV}" --type=$MASTER_PLAYBOOK
     ./cloud.rb "${PROVIDER}" terminate -e "${ENV}" --type=$MINION_PLAYBOOK
+    ./cloud.rb "${PROVIDER}" terminate -e "${ENV}" --type=$NETWORK_PLAYBOOK
 }
 
 [ -f ./cloud.rb ] || (echo 1>&2 'Cannot find ./cloud.rb' && exit 1)

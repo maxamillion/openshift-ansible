@@ -32,6 +32,7 @@ module OpenShift
         ah.extra_vars['oo_new_inst_names'] = names
         ah.extra_vars['oo_new_inst_tags'] = options[:tag]
         ah.extra_vars['oo_env'] = options[:env]
+        ah.extra_vars['oo_network'] = GceHelper.generate_network_name(options[:env])
 
         # Add a created by tag
         ah.extra_vars['oo_new_inst_tags'] = [] if ah.extra_vars['oo_new_inst_tags'].nil?
