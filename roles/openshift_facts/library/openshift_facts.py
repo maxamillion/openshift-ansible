@@ -1896,8 +1896,10 @@ class OpenShiftFacts(object):
             # ansible-2.1
             # pylint: disable=too-many-function-args,invalid-name
             self.system_facts = ansible_facts(module, ['hardware', 'network', 'virtual', 'facter'])  # noqa: F405
+            additional_facts = {}
             for (k, v) in self.system_facts.items():
-                self.system_facts["ansible_%s" % k.replace('-', '_')] = v
+                additional_facts["ansible_%s" % k.replace('-', '_')] = v
+            self.system_facts.update(additional_facts)
         except UnboundLocalError:
             # ansible-2.2
             self.system_facts = get_all_facts(module)['ansible_facts']  # noqa: F405
