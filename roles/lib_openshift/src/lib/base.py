@@ -469,14 +469,7 @@ class Utils(object):
         transaction_set = rpm.TransactionSet()
         rpmquery = transaction_set.dbMatch("name", "atomic-openshift")
 
-        results = []
-        for rpm_hdr in rpmquery:
-            results.append(rpm_hdr)
-
-        if results:
-            return True
-        else:
-            return False
+        return rpmquery.count() > 0
 
     # Disabling too-many-branches.  This is a yaml dictionary comparison function
     # pylint: disable=too-many-branches,too-many-return-statements,too-many-statements
