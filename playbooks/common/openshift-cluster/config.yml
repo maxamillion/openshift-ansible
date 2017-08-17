@@ -1,7 +1,7 @@
 ---
 # TODO: refactor this into its own include
 # and pass a variable for ctx
-- name: Verify Requirements
+- name: Verify Requirements - RHEL
   hosts: oo_all_hosts
   roles:
   - openshift_health_checker
@@ -17,6 +17,24 @@
       - package_version
       - docker_image_availability
       - docker_storage
+    when: ansible_distribution != "Fedora"
+
+- name: Verify Requirements - Fedora
+  hosts: oo_all_hosts
+  roles:
+  - openshift_health_checker
+  vars:
+  - r_openshift_health_checker_playbook_context: install
+  post_tasks:
+  - action: openshift_health_check
+    args:
+      checks:
+      - disk_availability
+      - memory_availability
+      - package_availability
+      - docker_image_availability
+      - docker_storage
+    when: ansible_distribution != "Fedora"
 
 - include: initialize_oo_option_facts.yml
   tags:
