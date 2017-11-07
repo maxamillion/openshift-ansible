@@ -26,8 +26,10 @@ from ansible.module_utils.six import string_types
 
 YUM_IMPORT_EXCEPTION = None
 DNF_IMPORT_EXCEPTION = None
+
 try:
     import yum  # pylint: disable=import-error
+    PKG_MGR = "yum"
 except ImportError as err:
     YUM_IMPORT_EXCEPTION = err
 
